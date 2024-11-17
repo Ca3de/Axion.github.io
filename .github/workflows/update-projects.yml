@@ -1,0 +1,37 @@
+name: Update Projects
+
+on:
+  push:
+    paths:
+      - 'projects/**'
+
+jobs:
+  update-json:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Update projects.json
+        run: |
+          # Assuming you have a script or method to generate projects.json
+          # For simplicity, this example appends a new project manually
+          echo '{
+            "projects": [
+              {
+                "title": "New Project",
+                "description": "Description of the new project.",
+                "image": "images/new-project.jpg",
+                "link": "https://github.com/yourusername/new-project",
+                "embedCode": "<pre><code>// New Project Code Snippet\nconsole.log('New Project');</code></pre>"
+              }
+            ]
+          }' > projects.json
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add projects.json
+          git commit -m "Add new project to projects.json"
+          git push
