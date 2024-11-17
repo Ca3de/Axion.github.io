@@ -222,6 +222,21 @@ nav {
     background-color: #e6005c;
 }
 
+/* Embed Code Styling */
+.embed-code {
+    background-color: #262626;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow-x: auto;
+}
+
+.embed-code pre {
+    margin: 0;
+    font-size: 0.9em;
+    color: #f0f0f0;
+}
+
 /* ===================== */
 /* Gallery Section       */
 /* ===================== */
