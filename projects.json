@@ -1,0 +1,19 @@
+{
+    "projects": [
+        {
+            "title": "Project One",
+            "description": "A brief description of Project One.",
+            "image": "images/project1.jpg",
+            "link": "https://github.com/yourusername/project-one",
+            "embedCode": "<pre><code>// Example Code Snippet\nconsole.log('Hello, World!');</code></pre>"
+        },
+        {
+            "title": "Project Two",
+            "description": "A brief description of Project Two.",
+            "image": "images/project2.jpg",
+            "link": "https://github.com/yourusername/project-two",
+            "embedCode": "<pre><code>// Another Code Snippet\nfunction greet() { return 'Hi!'; }</code></pre>"
+        }
+        // Add more projects as needed
+    ]
+}
