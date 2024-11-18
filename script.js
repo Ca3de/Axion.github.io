@@ -19,6 +19,13 @@ themeToggle.addEventListener('click', () => {
     // Toggle the light mode
     body.classList.toggle('light-mode');
 
+    // Save the theme
+    if (body.classList.contains('light-mode')) {
+        localStorage.setItem('theme', 'light');
+    } else {
+        localStorage.setItem('theme', 'dark');
+    }
+
     // Remove the circle after animation
     circle.addEventListener('animationend', () => {
         circle.remove();
@@ -31,19 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedTheme === 'light') {
         body.classList.add('light-mode');
     }
-});
 
-// Save theme preference
-body.addEventListener('classChange', () => {
-    if (body.classList.contains('light-mode')) {
-        localStorage.setItem('theme', 'light');
-    } else {
-        localStorage.setItem('theme', 'dark');
-    }
-});
-
-// Initialize AOS
-document.addEventListener('DOMContentLoaded', () => {
+    // Initialize AOS
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 800,
