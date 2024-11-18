@@ -25,16 +25,25 @@ jobs:
         with:
           node-version: '20'  # Use Node.js version 20
 
-      # 3. Run updateProjects.js
+      # 3. Pull Latest Changes with Rebase
+      - name: Pull Latest Changes
+        run: |
+          git pull --rebase origin main
+
+      # 4. Run updateProjects.js
       - name: Run updateProjects.js
         run: |
           node updateProjects.js
 
-      # 4. Commit and Push changes
-      - name: Commit and Push changes
+      # 5. Configure Git
+      - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+
+      # 6. Commit and Push Changes
+      - name: Commit and Push changes
+        run: |
           git add projects.json
           git commit -m "Automated update of projects.json" || echo "No changes to commit"
           git push
