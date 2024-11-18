@@ -7,16 +7,28 @@ const outputFile = path.join(__dirname, 'projects.json');
 let projects = [];
 
 // Read all JSON files in the projects_data directory
-fs.readdir(projectsDir, (err, files) => {
-    if (err) {
-        console.error('Error reading projects_data directory:', err);
-        process.exit(1);  // Exit with failure
-    }
+try {
+    const files = fs.readdirSync(projectsDir);
 
     files.forEach(file => {
         if (path.extname(file) === '.json') {
-            const projectData = JSON.parse(fs.readFileSync(path.join(projectsDir, file)));
-            projects.push(projectData);
+            const filePath = path.join(projectsDir, file);
+            const fileContent = fs.readFileSync(filePath, 'utf-8');
+            try {
+                const projectData = JSON.parse(fileContent);
+
+                // Optional: Validate required fields
+                const requiredFields = ['title', 'description', 'image', 'link', 'code', 'language'];
+                const hasAllFields = requiredFields.every(field => field in projectData);
+
+                if (hasAllFields) {
+                    projects.push(projectData);
+                } else {
+                    console.warn(`Skipping ${file}: Missing required fields.`);
+                }
+            } catch (parseError) {
+                console.error(`Error parsing ${file}:`, parseError);
+            }
         }
     });
 
@@ -24,4 +36,7 @@ fs.readdir(projectsDir, (err, files) => {
     const output = { projects };
     fs.writeFileSync(outputFile, JSON.stringify(output, null, 4));
     console.log('projects.json has been updated.');
-});
+} catch (err) {
+    console.error('Error processing projects:', err);
+    process.exit(1);  // Exit with failure
+}
