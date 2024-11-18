@@ -3,7 +3,7 @@ name: Update Projects JSON
 on:
   push:
     paths:
-      - 'projects_data/**'  # Folder where you add new project data
+      - 'projects_data/**'  # Trigger the workflow when changes are made in this folder
 
 permissions:
   contents: write  # Grant write permissions for repository contents
@@ -21,9 +21,9 @@ jobs:
 
       # 2. Set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v4.1.0
+        uses: actions/setup-node@4.1.0
         with:
-          node-version: '20'  # Use Node.js version 20
+          node-version: '20'  # Specify Node.js version
 
       # 3. Pull Latest Changes with Rebase
       - name: Pull Latest Changes
