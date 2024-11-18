@@ -1,37 +1,34 @@
-name: Update Projects
+name: Update Projects JSON
 
 on:
   push:
     paths:
-      - 'projects/**'
+      - 'projects_data/**'  # Folder where you add new project data
 
 jobs:
   update-json:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+
       - name: Update projects.json
         run: |
-          # Assuming you have a script or method to generate projects.json
-          # For simplicity, this example appends a new project manually
-          echo '{
-            "projects": [
-              {
-                "title": "New Project",
-                "description": "Description of the new project.",
-                "image": "images/new-project.jpg",
-                "link": "https://github.com/yourusername/new-project",
-                "embedCode": "<pre><code>// New Project Code Snippet\nconsole.log('New Project');</code></pre>"
-              }
-            ]
-          }' > projects.json
+          node updateProjects.js
 
       - name: Commit and Push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add projects.json
-          git commit -m "Add new project to projects.json"
+          git commit -m "Automated update of projects.json"
           git push
