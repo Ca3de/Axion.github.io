@@ -10,24 +10,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout Repository
       - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/checkout@v3
         with:
-          node-version: '20'  # Ensuring compatibility as per the deprecation warning
+          persist-credentials: false  # Disable automatic token setup
+          fetch-depth: 0  # Fetch all history for all branches
 
+      # 2. Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Use Node.js version 20
+
+      # 3. Run updateProjects.js
       - name: Run updateProjects.js
         run: |
           node updateProjects.js
 
+      # 4. Configure Git
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      # 5. Commit and Push changes
       - name: Commit and Push changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          # Add changes to git
           git add projects.json
-          git commit -m "Automated update of projects.json"
-          git push
+          
+          # Commit if there are changes
+          git commit -m "Automated update of projects.json" || echo "No changes to commit"
+          
+          # Push changes using the GITHUB_TOKEN for authentication
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
