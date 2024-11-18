@@ -10,9 +10,10 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #1a1a1a;
-    color: #e6e6e6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     line-height: 1.6;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .container {
@@ -26,7 +27,7 @@ h2 {
     text-align: center;
     margin-bottom: 40px;
     font-size: 2.5em;
-    color: #ff1a75;
+    color: var(--accent-color);
 }
 
 /* ===================== */
@@ -34,11 +35,12 @@ h2 {
 /* ===================== */
 
 nav {
-    background-color: #0d0d0d;
+    background-color: var(--nav-bg-color);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    transition: background-color 0.5s;
 }
 
 .nav-container {
@@ -49,7 +51,7 @@ nav {
 }
 
 .logo a {
-    color: #ff1a75;
+    color: var(--accent-color);
     font-size: 1.8em;
     text-decoration: none;
     font-weight: bold;
@@ -58,6 +60,7 @@ nav {
 .nav-links {
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 .nav-links li {
@@ -65,14 +68,27 @@ nav {
 }
 
 .nav-links a {
-    color: #e6e6e6;
+    color: var(--nav-text-color);
     text-decoration: none;
     font-size: 1.1em;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: #ff1a75;
+    color: var(--accent-color);
+}
+
+.theme-toggle {
+    margin-left: 20px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001; /* Ensure it's above the nav background */
+}
+
+.theme-toggle i {
+    color: var(--nav-text-color);
+    font-size: 1.5em;
+    transition: color 0.3s;
 }
 
 .hamburger {
@@ -81,7 +97,7 @@ nav {
 }
 
 .hamburger i {
-    color: #e6e6e6;
+    color: var(--nav-text-color);
     font-size: 1.8em;
 }
 
@@ -106,7 +122,7 @@ nav {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    border: 4px solid #ff1a75;
+    border: 4px solid var(--accent-color);
     object-fit: cover;
     margin-bottom: 20px;
 }
@@ -118,7 +134,7 @@ nav {
 
 .intro p {
     font-size: 1.2em;
-    color: #cccccc;
+    color: var(--secondary-text-color);
 }
 
 /* ===================== */
@@ -133,7 +149,7 @@ nav {
 }
 
 .skill-item {
-    background-color: #1e1e1e;
+    background-color: var(--section-bg-color);
     padding: 20px;
     border-radius: 10px;
     width: 250px;
@@ -143,12 +159,12 @@ nav {
 
 .skill-item:hover {
     transform: translateY(-10px);
-    background-color: #262626;
+    background-color: var(--section-hover-bg-color);
 }
 
 .skill-item i {
     font-size: 2.5em;
-    color: #ff1a75;
+    color: var(--accent-color);
     margin-bottom: 15px;
 }
 
@@ -159,7 +175,7 @@ nav {
 
 .skill-item p {
     font-size: 1em;
-    color: #cccccc;
+    color: var(--secondary-text-color);
 }
 
 /* ===================== */
@@ -174,7 +190,7 @@ nav {
 }
 
 .project-card {
-    background-color: #1e1e1e;
+    background-color: var(--section-bg-color);
     border-radius: 10px;
     overflow: hidden;
     width: 300px;
@@ -199,19 +215,19 @@ nav {
 .project-info h3 {
     margin-bottom: 10px;
     font-size: 1.5em;
-    color: #ff1a75;
+    color: var(--accent-color);
 }
 
 .project-info p {
     font-size: 1em;
-    color: #cccccc;
+    color: var(--secondary-text-color);
     margin-bottom: 15px;
 }
 
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #ff1a75;
+    background-color: var(--accent-color);
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -219,7 +235,7 @@ nav {
 }
 
 .btn:hover {
-    background-color: #e6005c;
+    background-color: var(--accent-hover-color);
 }
 
 /* Embed Code Styling */
@@ -277,14 +293,14 @@ nav {
 }
 
 .social-links a {
-    color: #e6e6e6;
+    color: var(--nav-text-color);
     font-size: 1.5em;
     text-decoration: none;
     transition: color 0.3s;
 }
 
 .social-links a:hover {
-    color: #ff1a75;
+    color: var(--accent-color);
 }
 
 .social-links a i {
@@ -296,11 +312,12 @@ nav {
 /* ===================== */
 
 footer {
-    background-color: #0d0d0d;
+    background-color: var(--nav-bg-color);
     padding: 20px 0;
     text-align: center;
-    color: #e6e6e6;
+    color: var(--nav-text-color);
     font-size: 0.9em;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 /* ===================== */
@@ -312,7 +329,7 @@ footer {
         position: absolute;
         top: 70px;
         left: -100%;
-        background-color: #0d0d0d;
+        background-color: var(--nav-bg-color);
         width: 100%;
         height: calc(100vh - 70px);
         flex-direction: column;
@@ -340,27 +357,74 @@ footer {
         flex-direction: column;
         align-items: center;
     }
+
+    .theme-toggle {
+        margin-left: 0;
+        margin-top: 20px;
+    }
 }
+
+/* ===================== */
+/* Theme Variables       */
+/* ===================== */
 
 :root {
     --bg-color: #1a1a1a;
     --text-color: #e6e6e6;
-    --accent-color: #1aff98;
+    --nav-bg-color: #0d0d0d;
+    --nav-text-color: #e6e6e6;
+    --section-bg-color: #1e1e1e;
+    --section-hover-bg-color: #262626;
+    --secondary-text-color: #cccccc;
+    --accent-color: #ff1a75;
+    --accent-hover-color: #e6005c;
 }
 
 body.light-mode {
     --bg-color: #ffffff;
     --text-color: #000000;
-    --accent-color: #1aff98;
+    --nav-bg-color: #f0f0f0;
+    --nav-text-color: #000000;
+    --section-bg-color: #f9f9f9;
+    --section-hover-bg-color: #e6e6e6;
+    --secondary-text-color: #333333;
+    --accent-color: #1aff98; /* Green */
+    --accent-hover-color: #00cc7a;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.5s, color 0.5s;
 }
 
 .btn, .logo a {
+    color: var(--accent-color);
+}
+
+.btn:hover {
+    background-color: var(--accent-hover-color);
+}
+
+nav, footer {
+    background-color: var(--nav-bg-color);
+    color: var(--nav-text-color);
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.nav-links a, .hamburger i, .theme-toggle i {
+    color: var(--nav-text-color);
+}
+
+.nav-links a:hover, .btn, .logo a {
+    color: var(--accent-color);
+}
+
+.social-links a {
+    color: var(--nav-text-color);
+}
+
+.social-links a:hover {
     color: var(--accent-color);
 }
 
