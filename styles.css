@@ -341,3 +341,31 @@ footer {
         align-items: center;
     }
 }
+
+/* ===================== */
+/* Prism.js Custom Styles */
+/* ===================== */
+
+code[class*="language-"],
+pre[class*="language-"] {
+    color: #f0f0f0;
+    background: none;
+    text-shadow: none;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1em;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 4;
+    hyphens: none;
+}
+
+pre[class*="language-"] {
+    padding: 1em;
+    margin: .5em 0;
+    overflow: auto;
+    border-radius: 5px;
+}
