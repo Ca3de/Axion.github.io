@@ -10,7 +10,7 @@ let projects = [];
 fs.readdir(projectsDir, (err, files) => {
     if (err) {
         console.error('Error reading projects_data directory:', err);
-        return;
+        process.exit(1);  // Exit with failure
     }
 
     files.forEach(file => {
