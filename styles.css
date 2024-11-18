@@ -342,6 +342,29 @@ footer {
     }
 }
 
+:root {
+    --bg-color: #1a1a1a;
+    --text-color: #e6e6e6;
+    --accent-color: #ff1a75;
+}
+
+body.light-mode {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --accent-color: #ff1a75;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn, .logo a {
+    color: var(--accent-color);
+}
+
+
 /* ===================== */
 /* Prism.js Custom Styles */
 /* ===================== */
